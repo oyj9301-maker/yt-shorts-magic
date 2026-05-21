@@ -159,7 +159,7 @@ async function callAI(transcript: string, title: string) {
 }
 
 export const extractShorts = createServerFn({ method: "POST" })
-  .validator((d: unknown) => z.object({ url: z.string().url() }).parse(d))
+  .inputValidator((d: unknown) => z.object({ url: z.string().url() }).parse(d))
   .handler(async ({ data }): Promise<ExtractResult> => {
     const videoId = parseVideoId(data.url);
     if (!videoId) throw new Error("유효한 유튜브 링크가 아닙니다.");
